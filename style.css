@@ -17,13 +17,12 @@ footer a {
 	padding-right: 30px;
 }
 #title_container h1{
+	text-align: center;
 	font-size: 2.8em;
 }
 #banner {
-	background-size: cover;
-	background-repeat: no-repeat;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	height: 460px;
 }
 #produits {
