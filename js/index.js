@@ -1,29 +1,31 @@
-function getRequest(){
+function getRequest() {
+	const fetchPromise = fetch("http://localhost:3000/api/cameras");
+	const inputJS = document.getElementById("produits");
 
-const fetchPromise = fetch("http://localhost:3000/api/cameras");
-const inputJS = document.getElementById("produits");
-
-fetchPromise.then(response => {// éxécution de  la promesse
-  return response.json(); // récupération du résultat sous format json
-})
-.then((data => {
-  data.forEach((item)  => { //pour chaque item récupéré de l'API, on crée une constante name, price_id etc..
-    const { name, price, _id, description, imageUrl } = item;
-            //affichage des informations sous format HTML
-            inputJS.innerHTML +=`
-            <div class="container col-md-4 col-lg-2">
-               <div class="affichage_produit mt-4 card bg-white">
-                  <img class=”card-img-top” src="${imageUrl}"  alt="appareil ${name}">
-                  <div class="card-body">
-                     <h3 class="card-title">${name}</h3>
-                     <span>${price/100}€</span></p>
-                     <p class="card-text product-description">${description}</p>
-                     <div class="text-center mt-4" ><a id="bouton" type="button" class="btn btn-secondary text-white" onclick="window.location.href = 'produit.html?id=${_id}'">En savoir plus</a></div>
-                  </div>
-               </div>
-            </div>`
-   })
-}))
-
+	fetchPromise
+		.then((response) => {
+			//on exécute la promesse
+			return response.json(); // on récupère le résultat sous format json
+		})
+		.then((data) => {
+			data.forEach((item) => {
+				//pour chaque item récupéré de l'API, on crée une constante name, price_id etc..
+				const { name, price, _id, description, imageUrl } = item;
+				//puis on affiche ces informations sous forme HTML
+				inputJS.innerHTML += `
+				<div class="container col-md-4 col-lg-2">
+				   <div class="affichage_produit mt-4 card bg-white">
+					  <img class=”card-img-top” src="${imageUrl}"  alt="appareil ${name}">
+					  <div class="card-body">
+						 <h3 class="card-title">${name}</h3>
+						 <span>${price / 100}€</span></p>
+						 <p class="card-text product-description">${description}</p>
+						 <div class="text-center mt-4" ><a id="bouton" type="button" class="btn btn-secondary text-white" onclick="window.location.href = 'produit.html?id=${_id}'">En savoir plus</a></div>
+					  </div>
+				   </div>
+				</div>`;
+			});
+		});
 }
-getRequest()
+getRequest();
+cartNumber();
