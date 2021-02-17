@@ -1,4 +1,4 @@
-//pour afficher le nombre de produits panier dans le menu nav
+//pour afficher le nombre de produits panier(cart) dans le menu nav
 function cartNumber() {
 	const panier = JSON.parse(localStorage.getItem("panier"));
 
