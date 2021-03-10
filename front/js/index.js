@@ -1,4 +1,4 @@
-// Initialise la constante - Positionne dans la div nommée "products"
+// Initialise la constante - Positionne dans la div nommée "produits"
 const products = document.getElementById("produits");
 
 // Appelle l'API

@@ -7,7 +7,7 @@
 			content="Orinoco - Le site de référence pour votre appareil photo"
 		/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap"
@@ -25,13 +25,13 @@
 			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 			crossorigin="anonymous"
 		/>
-		<title>Orinoco - Panier</title>
+		<title>Orinoco - Votre appareil-photo vintage</title>
 	</head>
 	<body>
 		<header>
 			<nav class="navbar navbar-expand-lg navbar-light">
-				<a class="navbar-brand" href="index.html"
-					><img class="mr-3" src="logo.png" height="60" alt="Site logo"
+				<a class="navbar-brand" href="../index.html"
+					><img class="mr-3" src="../images/logo.png" height="60" alt="Site logo"
 				/></a>
 				<button
 					class="navbar-toggler"
@@ -43,18 +43,22 @@
 				</button>
 				<div id="navbarContent" class="collapse navbar-collapse">
 					<ul class="navbar-nav w-100 d-flex justify-content-end">
-						<li class="nav-item">
-							<a class="nav-link font-weight-bold" href="index.html">NOS PRODUITS</a>
+						<li class="nav-item active">
+							<a class="nav-link font-weight-bold" href="../index.html"
+								>NOS PRODUITS</a
+							>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link font-weight-bold" href="panier.html">
+							<a class="nav-link font-weight-bold" href="../panier.html">
 								PANIER
-								<i class="fas fa-shopping-cart"></i>
+								<i class="fas fa-shopping-cart fa-1x"></i>
 								<span id="cart_number"></span>
 							</a>
 						</li>
-						<li class="nav-item active">
-							<a class="nav-link font-weight-bold" href="#">COMMANDE</a>
+						<li class="nav-item">
+							<a class="nav-link font-weight-bold" href="../confirmation.html"
+								>COMMANDE</a
+							>
 						</li>
 					</ul>
 				</div>
@@ -67,10 +71,39 @@
 		</section>
 		<main class="pb-5">
 			<section class="bg-white col-md-auto text-center mb-5 pt-3 pb-3">
-				<h2>Votre commande</h2>
+				<h2>Le site de référence pour votre appareil-photo vintage</h2>
 			</section>
-			<section class="container mt-5" id="confirmation"></section>
-			<section class="container mt-5" id="no_command"></section>
+			<section class="container col-10 col-md-6 bg-white rounded pb-4">
+				<div class="row">
+					<div id="focus_produit"></div>
+					<div class="input-group w-50 ml-4 mt-4">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="lense_select">Objectif</label>
+						</div>
+						<select class="custom-select" id="lense_select">
+							<option value="" selected>Votre choix...</option>
+						</select>
+					</div>
+				</div>
+				<div class="text-center mt-4">
+					<button
+						id="bouton"
+						type="button"
+						class="btn btn-secondary btn-lg"
+						onclick="ajoutPanier()"
+						data-toggle="modal"
+						data-target="#exampleModalCenter"
+					>
+						Ajouter au panier
+					</button>
+					<div id="pop_up"></div>
+					<div class="mt-4">
+						<a href="../html/index.html" class="font-weight-bold text-success"
+							>Retour liste produits</a
+						>
+					</div>
+				</div>
+			</section>
 		</main>
 		<footer class="bg-secondary text-white">
 			<div class="">
@@ -79,7 +112,7 @@
 						<div class="col">
 							<ul class="list-inline text-center pt-3">
 								<li class="list-inline-item">
-									<a href="index.html">Mentions légales</a>
+									<a href="../html/index.html">Mentions légales</a>
 								</li>
 								<li class="list-inline-item">&middot;</li>
 								<li class="list-inline-item">
@@ -97,15 +130,14 @@
 				</div>
 			</div>
 		</footer>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script
 			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 			crossorigin="anonymous"
 		></script>
-		<script src="js/cartnumber.js"></script>
-		<script src="js/confirmation.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="../js/cartnumber.js"></script>
+		<script src="../js/produit.js"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
