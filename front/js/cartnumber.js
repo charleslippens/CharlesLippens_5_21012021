@@ -1,10 +1,11 @@
-//pour afficher le nombre de produits panier(cart) dans le menu nav
+// Fonction pour évaluer le nombre de produits différents du panier(cart_number)
 function cartNumber() {
-	const panier = JSON.parse(localStorage.getItem("panier"));
-
-	if (panier) {
+	const cart = JSON.parse(localStorage.getItem("cart"));
+	// incrémente inCart tant qu'il y a des éléménts dans le panier
+	if (cart) {
 		let inCart = 0;
-		panier.forEach(() => {
+		// incrémente inCart tant qu'il y a des éléménts dans le panier
+		cart.forEach(() => {
 			inCart = inCart + 1;
 		});
 		localStorage.setItem("inCart", inCart);

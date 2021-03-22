@@ -1,55 +1,63 @@
-// Initialise la constante - Positionne dans la div nommée "produits"
-const products = document.getElementById("produits");
+// Page d'accueil du site Orinoco
 
-// Appelle l'API
+// On intialise la constante "products"
+const products = document.getElementById("products");
+
+// On appelle l'API
 fetch("http://localhost:3000/api/cameras")
-	// Récupère une réponse au format json
+	// Récupération une réponse au format json
 	.then(function (response) {
 		return response.json();
 	})
-
-	// Récupère la liste des produits
+	// Récupération de la liste des produits et affichage
 	.then(function (items) {
 		getRequest(items);
 	});
 
-// Affiche le contenu de chaque carte produit dans le code HTMl
+// On évalue le nombre de produits dans le panier pour affichage dans la navigation
+cartNumber();
+
+// Fonction pour afficher les cartes produits dans le code HTMl
 function getRequest(products) {
-	products.forEach((product) => {
-		// Crée une div pour l'affichage des produits
+	// Boucle sur les produits
+	products.forEach( (product) => {
+
+		// On crée une div (container) pour l'affichage du produit
 		const productCard = document.createElement("div");
 		productCard.setAttribute("id", product._id);
 		productCard.setAttribute("class", "card p-6 m-4");
+		productCard.setAttribute("style", "justify-content:space-between");
 
-		// Affiche l'image des produits
+		// On affiche l'image du produit
 		const productImg = document.createElement("img");
 		productImg.setAttribute("src", product.imageUrl);
 		productImg.setAttribute("class", "img-fluid");
-		productImg.setAttribute("style", "max-width: 400px");
+		productImg.setAttribute("style", "max-width: 300px");
 		productCard.appendChild(productImg);
 
-		// Affiche le nom des produits
+		// On affiche le nom du produit
 		const productName = document.createElement("h3");
-		productName.setAttribute("class", "name card-title pt-2");
+		productName.setAttribute("class", "name card-title pt-2 pl-2");
 		productName.innerHTML = product.name;
 		productCard.appendChild(productName);
 
-		// Affiche le prix des produits
+		// On affiche le prix du produit
 		const productPrice = document.createElement("p");
-		productPrice.setAttribute("class", "price");
+		productPrice.setAttribute("class", "price pl-2");
 		productPrice.innerHTML = product.price.toFixed(2) / 100 + ",00 €";
 		productCard.appendChild(productPrice);
 
-		// Crée le bouton "Voir plus" sur chaque carte produit
+		// On crée le bouton "Voir plus" sur chaque carte produit
 		const productLink = document.createElement("a");
-		productLink.setAttribute("href", "produit.html?id=" + product._id);
+		productLink.setAttribute("href", "product.html?id=" + product._id);
 		productLink.setAttribute("class", "link btn bg-pink btn-outline-dark");
 		productLink.innerHTML = "Voir plus ➔ ";
 		productCard.appendChild(productLink);
 
-		// Insère la div "productCard" dans la div nommée "products"
-		document.getElementById("produits").appendChild(productCard);
+		// On ajoute la carte produit (productCard, enfant) à la liste des produits (products, parent)
+		document.getElementById("products").appendChild(productCard);
 	});
 }
-getRequest();
-cartNumber();
+
+//getRequest();
+

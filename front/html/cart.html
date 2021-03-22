@@ -44,12 +44,12 @@
 				<div id="navbarContent" class="collapse navbar-collapse">
 					<ul class="navbar-nav w-100 d-flex justify-content-end">
 						<li class="nav-item">
-							<a class="nav-link font-weight-bold" href="front/html/index.html"
+							<a class="nav-link font-weight-bold" href="../html/index.html"
 								>NOS PRODUITS</a
 							>
 						</li>
 						<li class="nav-item active">
-							<a class="nav-link font-weight-bold" href="front/html/panier.html">
+							<a class="nav-link font-weight-bold" href="../html/cart.html">
 								PANIER
 								<i class="fas fa-shopping-cart"></i>
 								<span id="cart_number"></span>
@@ -69,7 +69,7 @@
 				<h2>Votre sélection</h2>
 			</section>
 			<section class="container bg-white pt-5 pb-5 rounded">
-				<div id="tableau_panier" class="">
+				<div id="table_empty" class="">
 					<table class="table table-striped table-bordered table-sm">
 						<thead class="thead-dark">
 							<tr>
@@ -80,40 +80,47 @@
 								<th class="text-center"></th>
 							</tr>
 						</thead>
-						<tbody id="ajout_panier"></tbody>
+						<tbody id="add_cart"></tbody>
 						<tr>
 							<td class="text-right font-weight-bold" colspan="3">TOTAL</td>
-							<td id="prix_total" class="text-center font-weight-bold"></td>
+							<td id="price_total" class="text-center font-weight-bold"></td>
 						</tr>
 					</table>
 				</div>
 				<div class="text-center">
 					<button
-						id="vider_panier"
+						id="clear_Cart"
 						class="btn btn-outline-secondary"
 						type="button"
-						onclick="viderPanier()"
+						onclick="clearCart()"
 					>
 						Vider le panier
 					</button>
-					<div id="valid_commande" class="btn btn-success">
-						<a href="#formulaire" class="text-white">Poursuivre votre commande</a>
+					<div id="validate_command" class="btn btn-secondary">
+						<!-- <a href="#form" class="text-white">Poursuivre votre commande</a> -->
+						<a href="../html/index.html" class="text-white">Poursuivre votre commande</a>
+
 					</div>
-					<div id="panier_vide" class="text-center"></div>
+					<div id="cart_empty" class="text-center"></div>
 				</div>
 			</section>
-			<section id="formulaire" class="container bg-white pb-4 rounded mt-4">
+			<section id="form" class="container bg-white pb-4 rounded mt-4">
 				<form class="text-center mx-auto pb-4 pt-4">
-					<h1 class="col-8 rounded mx-auto mb-4 bg-secondary text-white">
+					<h1 class="col-10 rounded mx-auto mb-4 bg-secondary text-white">
 						VALIDATION DE COMMANDE
 					</h1>
 					<div class="text-center pb-4">
 						Veuillez renseignez vos coordonnées pour finaliser votre commande
 					</div>
 					<div class="form-row justify-content-center">
-						<div class="form-group form-inline justify-content-center mr-2">
+						<div class="form-group form-inline justify-content-center mr-4">
 							<label for="name" class="mr-2">NOM</label>
-							<input type="text" class="champ form-control" id="name" name="name" />
+							<input 
+								type="text"
+								class="champ form-control"
+								id="name"
+								name="name" 
+							/>
 						</div>
 						<div class="form-group form-inline justify-content-center">
 							<label for="firstname" class="mr-2">PRENOM</label>
@@ -124,9 +131,9 @@
 								name="firstname"
 							/>
 						</div>
-					</div>
+					</div>	
 					<div class="form-row justify-content-center">
-						<div class="form-group form-inline justify-content-center mr-2">
+						<div class="form-group form-inline justify-content-center mr-4">
 							<label for="adress" class="mr-2">ADRESSE</label>
 							<input
 								type="text"
@@ -135,13 +142,7 @@
 								name="adress"
 							/>
 						</div>
-					</div>
-					<div class="form-row justify-content-center">
-						<div class="form-group form-inline justify-content-center mr-2">
-							<label for="city" class="mr-2">VILLE</label>
-							<input type="text" class="champ form-control" id="city" name="city" />
-						</div>
-						<div class="form-group form-inline justify-content-center mr-2">
+						<div class="form-group form-inline justify-content-center mr-4">
 							<label for="postalcode" class="mr-2">CODE POSTAL</label>
 							<input
 								type="text"
@@ -151,8 +152,16 @@
 							/>
 						</div>
 					</div>
-					<div id="erreur_code" class="mb-2"></div>
+					<div id="error_code" class="mb-2"></div>
 					<div class="form-row justify-content-center">
+						<div class="form-group form-inline justify-content-center mr-4">
+							<label for="city" class="mr-2">VILLE</label>
+							<input
+								type="text"
+								class="champ form-control"
+								id="city"
+								name="city" />
+						</div>
 						<div class="form-group form-inline justify-content-center">
 							<label for="mail" class="mr-2">E-MAIL</label>
 							<div class="input-group">
@@ -168,11 +177,11 @@
 							</div>
 						</div>
 					</div>
-					<div id="erreur_mail" class="mb-4"></div>
+					<div id="error_mail" class="mb-4"></div>
 					<input
 						type="reset"
-						id="rafraichir"
-						name="rafraichir"
+						id="refresh"
+						name="refresh"
 						value="Effacer"
 						class="btn btn-outline-secondary"
 					/>
@@ -181,7 +190,7 @@
 						id="envoi"
 						name="envoi"
 						value="Commander"
-						class="btn btn-success"
+						class="btn btn-secondary"
 					/>
 				</form>
 			</section>
@@ -193,7 +202,7 @@
 						<div class="col">
 							<ul class="list-inline text-center pt-3">
 								<li class="list-inline-item">
-									<a href="front/html/index.html">Mentions légales</a>
+									<a href="../html/index.html">Mentions légales</a>
 								</li>
 								<li class="list-inline-item">&middot;</li>
 								<li class="list-inline-item">
@@ -214,7 +223,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script src="../js/cartnumber.js"></script>
-		<script src="../js/panier.js"></script>
+		<script src="../js/cart.js"></script>
 		<script
 			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
