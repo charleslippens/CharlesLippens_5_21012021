@@ -24,5 +24,7 @@ git clone https://github.com/charleslippens/CharlesLippens_5_21012021.git front
 ▹ Démarrez ensuite le backend en exécutant node server ;
 ▹ Le serveur doit fonctionner sur localhost avec le port par défaut 3000 ;
 
+Pour lancer le site, ouvrer le fichier index.html du dossier front à l'aide de votre navigateur.
+
 
 
