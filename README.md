@@ -25,11 +25,23 @@ https://github.com/OpenClassrooms-Student-Center/JWDP5
 
 ▹ Extraire le dossier JWDP5-master avec "Extraire ici" et renommez le dossier JWDP5-master en backend et placez le dans le dossier Orinoco;
 
+
+OU
+
+clone https://github.com/OpenClassrooms-Student-Center/JWDP5.git backend
+
 ▹ Téléchargez le front du projet:
 
 https://github.com/charleslippens/CharlesLippens_5_21012021
 
+
 ▹ Extraire le dossier CharlesLippens_5_21012021-main avec "Extraire ici" et renommez le dossier CharlesLippens_5_21012021-main en front et placez le dans le dossier Orinoco;
+
+
+OU
+
+clone https://github.com/charleslippens/CharlesLippens_5_21012021.git front
+
 
 ▹ Ouvrir le dossier Orinoco avec Vscode ;
 
