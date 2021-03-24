@@ -4,7 +4,9 @@
 function addContent() {
 	let id = new URL(window.location).searchParams.get("id");
 	fetch(`${"http://localhost:3000/api/cameras"}/${id}`)
+		// Récupération de réponse au format json
 		.then((response) => response.json())
+		// Récupération des informations sur le produit id 
 		.then((data) => {
 			item = data;
 			addHTML();
@@ -12,7 +14,7 @@ function addContent() {
 		});
 }
 
-// Fonction pour ajouter les objectifs pour chaque produit renseigné dans l'API
+// Fonction pour ajouter les objectifs dans la liste déroulante de chaque produit renseigné dans l'API
 function addLenses() {
 	for (let i = 0; i < item.lenses.length; i++) {
 		document.getElementById(
@@ -33,13 +35,13 @@ function addHTML() {
 	`;
 }
 
-// Fonction pour ajouter le produit au panier
+// Fonction pour ajouter le produit au panier (en local storage)
 function addCart() {
 	// Récupère le type d'objectif choisi
 	let lenses = document.querySelector("select").value;
-	// Variable exist pour indiquer que appareil photo+objectif est choisi 
+	// Variable exist pour indiquer que appareil photo+objectif est choisi, initialisé à false
 	let exist = false;
-	// On teste si l'utilsateur a choisi un objectif
+	// On teste si l'utilisateur a choisi un objectif
 	if (lenses == "") {
 		// Si aucun objectif n'est choisi on affiche un message d'erreur
 		swal({

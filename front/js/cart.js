@@ -1,17 +1,18 @@
 const cart = JSON.parse(localStorage.getItem("cart"));
 
-// On teste si le panier n'est pas vide
+// On affiche le panier ou un message si le panier est vide
 if (cart) {
 	rowTable();
 } else {
 	tableEmpty();
 }
 
-// On utilise une boucle pour importer les données de chaque article panier
+// On utilise une boucle pour afficher le panier: données de chaque article, calcul prix total et nombre de produits différents
 function rowTable() {
 	cart.forEach(function (result, index) {
 		infosHTML(result, index);
 	});
+	buttonOnclick ();
 	totalCart();
 	cartNumber();
 }
@@ -31,17 +32,20 @@ function infosHTML(result, index) {
          </td>
         <td id="price_unitary${index}" class="text-center">${result.price + " €"}</td>
         <td id="subtotal${index}"class="subtotal text-center">${result.subTotal + " €"}</td>
-        <td class="text-center"><i id="remove_product" onclick="removeItem(${index})" type="button" class="fas fa-trash-alt" title="Supprimer le produit du panier"></i></td>
-      </tr>
+		<td class="text-center"><i id="button_remove${index}" type="button" class="fas fa-trash-alt" title="Supprimer le produit du panier"></i></td>
+
+		</tr>
     </tbody>`;
 }
 
-// On utilise addEventListener pour les actions des boutons de quantités +/-
-// On boucle sur les articles du panier pour des actions sur tous les boutons +/-
+// On utilise addEventListener pour les actions des boutons 
+// On boucle sur les articles du panier pour des actions sur tous les boutons +/-/poubelle
+function buttonOnclick () {
 cart.forEach(function (result,i) {
 	// On définit les variables button_minus/plus0, 1, 2...
 	let button_minusi='button_minus'+i; 
 	let button_plusi='button_plus'+i;
+	let button_removei="button_remove"+i;
 	// Appel de la fonction qui décrémente la quantité (minus) sur click
 	document.getElementById(button_minusi).addEventListener("click",quantityCham);
 	function quantityCham() {
@@ -52,7 +56,12 @@ cart.forEach(function (result,i) {
 	function quantityChap() {
 		quantityChange(i,'plus');
 	}
-});
+	// Appel de la fonction qui supprime le produit sur click
+	document.getElementById(button_removei).addEventListener("click",removeIte);
+	function removeIte() {
+		removeItem(i);
+	}
+});}
  
 // Calcul et affichage du prix total panier
 function totalCart() {
@@ -76,11 +85,13 @@ function tableEmpty() {
 	document.getElementById("form").style.display = "none";
 	document.getElementById("validate_command").style.display = "none";
 }
-// Pour vider le panier et le localStorage
+
+// Pour vider le panier, localStorage
 function clearCart() {
 	localStorage.clear();
 	location.reload();
 }
+
 // Pour retirer un article du panier
 function removeItem(i) {
 	cart.splice(i, 1); // on supprime le ième item du panier  
@@ -132,19 +143,28 @@ function quantityChange(index,i) {
 	if (changeQuantity <= 1) {
 		document.getElementById(`button_minus${index}`).setAttribute("disabled", "disabled");
 	}
+	// Décommenter our limiter la quantité
 	// On active le bouton + si qté < 10
-	if (changeQuantity < 10) {
-		document.getElementById(`button_plus${index}`).removeAttribute("disabled");
-	}
+	//if (changeQuantity < 10) {
+	//	document.getElementById(`button_plus${index}`).removeAttribute("disabled");
+	//}
 	// On désactive le bouton + si qté >= 10
-	if (changeQuantity >= 10) {
-		document.getElementById(`button_plus${index}`).setAttribute("disabled", "disabled");
-	}
+	//if (changeQuantity >= 10) {
+	//	document.getElementById(`button_plus${index}`).setAttribute("disabled", "disabled");
+	//}
 }
 
 // FORMULAIRE + REQUETE POST
 
-// On crée un évènement de vérification du champ mail en supprimant le focus
+// Vérification de 2 champs du formulaire et envoi commande 
+if (cart) {
+	checkMailAddress();
+	checkPostalCode();
+	submitForm();
+}
+
+// On crée un évènement pour vérifier le champ mail en supprimant le focus
+function checkMailAddress() {
 document.querySelector("#mail").addEventListener("blur", function () {
 	const mail = document.querySelector("#mail").value;
 	// Utilisation de regex pour format adresse mail
@@ -155,12 +175,14 @@ document.querySelector("#mail").addEventListener("blur", function () {
 		document.querySelector("#error_mail").textContent = "";
 	}
 });
+}
 
-// On crée un évènement pour vérifier le champ postalcode en enlevant le focus
+// On crée un évènement pour vérifier le champ code postal en enlevant le focus
+function checkPostalCode () {
 document.querySelector("#postalcode").addEventListener("blur", function () {
 	const postalCode = document.querySelector("#postalcode").value;
 	// Utilisation de regex pour 5 chiffres
-	const regexEmail = /^[0-9]{5}$/; 
+	const regexEmail = /^[0-9]{5}$/;
 	if (!regexEmail.test(postalCode)) {
 		document.querySelector("#error_code").textContent =
 			"Code postal non valide. 5 chiffres obligatoires";
@@ -168,6 +190,7 @@ document.querySelector("#postalcode").addEventListener("blur", function () {
 		document.querySelector("#error_code").textContent = "";
 	}
 });
+}
 
 // On crée un évènement pour effacer le formulaire
 //document.querySelector("#refresh").addEventListener("click", function () {
@@ -176,25 +199,34 @@ document.querySelector("#postalcode").addEventListener("blur", function () {
 //});
 
 // On crée un évènement pour valider le formulaire et envoyer la requête POST
+function submitForm() {
 document.querySelector("#form").addEventListener("submit", function (event) {
 	event.preventDefault();
+	// Bloque la commande si les champs du formulaire sont vides
 	let input = document.getElementsByTagName("input");
 	// On fait une boucle pour vérifier si chaque champ a été renseigné
 	for (let i = 0; i < input.length; i++) {
 		// Si un des champs est vide, on envoie d'un message d'erreur
 		if (input[i].value == "") {
 			swal(
-				"Formulaire non valide ! Merci de renseigner correctement le formulaire",
-				"warning"
+				"Formulaire non valide !", "Merci de renseigner correctement le formulaire"
 			);
 			return false;
 		}
+	}
+	// Bloque la commande si les champs code postal ou mail sont mal renseignés 
+	if ((document.querySelector("#error_code").textContent != "") || (document.querySelector("#error_mail").textContent != "")) {
+		swal(
+			"Formulaire non valide !", "Merci de renseigner correctement le formulaire"
+		);
+		return false;
 	}
 	requestPost();
 	confirmCommand();
 	localStorage.clear();
 	totalCart();
 });
+}
 
 // Pour créer la requete POST avec numéro commande et infos contact
 function requestPost() {

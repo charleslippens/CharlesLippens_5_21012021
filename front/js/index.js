@@ -59,5 +59,3 @@ function getRequest(products) {
 	});
 }
 
-//getRequest();
-
