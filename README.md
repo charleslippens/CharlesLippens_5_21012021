@@ -19,21 +19,25 @@ Vous devrez avoir Node et npm installés localement sur votre machine.
 
 ▹ Créer un dossier "Orinoco"
 
-▹ Clonez le backend (api) du projet:
+▹ Clonez le backend du projet:
 
-git clone https://github.com/OpenClassrooms-Student-Center/JWDP5.git backend
+https://github.com/OpenClassrooms-Student-Center/JWDP5
+
+▹ Renommez le dossier JWDP5 en backend et placez le dans dossier Orinoco
 
 ▹ Clonez le front du projet:
 
-git clone https://github.com/charleslippens/CharlesLippens_5_21012021.git front
+https://github.com/charleslippens/CharlesLippens_5_21012021
 
-▹ A partir du dossier backend, exécutez npm install ;
+▹ Placez le dossier front dans le dossier Orinoco
+
+▹ A partir du dossier backend, exécutez npm install dans le terminal ;
 
 ▹ Démarrez ensuite le backend en exécutant node server ;
 
 ▹ Le serveur doit fonctionner sur localhost avec le port par défaut 3000 ;
 
-▹ Pour lancer le site, ouvrez le fichier front/html/index.html du dossier front à l'aide de votre navigateur.
+▹ Pour lancer le site, ouvrez le fichier dans front/html/index.html à l'aide de votre navigateur.
 
 
 
