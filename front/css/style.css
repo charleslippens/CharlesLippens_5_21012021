@@ -12,9 +12,8 @@ footer a {
 	font-weight: bold;
 }
 #title_container {
-	text-align: right;
 	padding-top: 30px;
-	padding-right: 30px;
+	padding-right: 150px;
 }
 #title_container h1 {
 	text-align: center;
@@ -117,14 +116,12 @@ td img {
 	}
 	#title_container {
 		text-align: center;
-		padding-top: 0;
-		padding-right: 0;
-		display: flex;
-		align-items: center;
+		padding-top: 20px;
+		padding-right: 100px;
+		width:100%;
 	}
 	#title_container h1 {
-		font-size: 1.5em;
-		background-color: rgba(250, 250, 250, 0.8);
+		font-size: 1.8em;
 	}
 }
 @media screen and (max-width: 499px) {
@@ -136,17 +133,12 @@ td img {
 		justify-content: center;
 	}
 	#title_container {
-		text-align: center;
 		width: 80%;
-		padding-top: 0;
-		padding-right: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		padding-top:20px;
+		padding-right: 50px;
 	}
 
 	#title_container h1 {
-		font-size: 1.2em;
-		background-color: rgba(250, 250, 250, 0.8);
+		font-size: 1.4em;
 	}
 }

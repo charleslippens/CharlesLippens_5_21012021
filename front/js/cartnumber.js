@@ -5,8 +5,8 @@ function cartNumber() {
 	if (cart) {
 		let inCart = 0;
 		// incrémente inCart tant qu'il y a des éléménts dans le panier
-		cart.forEach(() => {
-			inCart = inCart + 1;
+		cart.forEach((camera) => {
+			inCart = inCart + camera.quantity;
 		});
 		localStorage.setItem("inCart", inCart);
 		document.getElementById("cart_number").textContent = inCart;

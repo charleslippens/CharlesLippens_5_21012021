@@ -111,7 +111,7 @@ function removeItem(i) {
 // Pour modifier les quantités dans le panier avec +/-
 function quantityChange(index,i) {
 	let quantity = document.getElementById(`quantity_number${index}`);
-	let changeQuantity = 0;
+	let changeQuantity = cart[index].quantity;
 	// On incrémente la quantité dans le localstorage si bouton +
 	if (i == 'plus') {
 		changeQuantity = ++cart[index].quantity;
@@ -124,7 +124,8 @@ function quantityChange(index,i) {
 			changeQuantity = --cart[index].quantity;
 		}
 	}
-	// On met à jour la quantité dans le tableau
+	// On met à jour la quantité dans le tableau et à afficher
+	cart[index].quantity = changeQuantity;
 	quantity.textContent = changeQuantity;
 	// On met à jour le sous-total dans le tableau
 	let subTotal = document.getElementById(`subtotal${index}`);
@@ -143,6 +144,7 @@ function quantityChange(index,i) {
 	if (changeQuantity <= 1) {
 		document.getElementById(`button_minus${index}`).setAttribute("disabled", "disabled");
 	}
+	cartNumber();
 	// Décommenter our limiter la quantité
 	// On active le bouton + si qté < 10
 	//if (changeQuantity < 10) {
@@ -230,9 +232,18 @@ document.querySelector("#form").addEventListener("submit", function (event) {
 
 // Pour créer la requete POST avec numéro commande et infos contact
 function requestPost() {
-	const idTable = cart.map(function (product) {
-		return product.id;
+	// idTable contient les identifiants des produits qui sont répétés en fonction de leur quantité
+	const idTable = new Array();
+	let j = -1;
+	// Boucle sur chaque produit
+	cart.forEach(function (product) {
+		// Boucle sur la quantité de chaque produit
+		for (let i = 0; i < product.quantity; i++) {
+			j = j+1;
+			idTable[j] = product.id;
+		}
 	});
+	// Order contient les infos retournées par le formulaire et les identifiants des produits
 	let order = {
 		contact: {
 			firstName: document.querySelector("#firstname").value.trim(),
@@ -243,7 +254,6 @@ function requestPost() {
 		},
 		products: idTable,
 	};
-	//console.log(order);
 	const request = new Request("http://localhost:3000/api/cameras/order", {
 		// On crée la requête POST vers API
 		method: "POST",
@@ -272,5 +282,3 @@ function confirmCommand() {
 		window.location = "confirmation.html";
 	}, 3000);
 }
-
-
